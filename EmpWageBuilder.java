@@ -1,41 +1,37 @@
 class EmpWageBuilder
 {
-	static int empHour=0;
-	static int empRatePerHour=20;
-	static int empSalary=0;
-	static final int partTime=0;
-	static final int fullTime=1;
+public static void main(String[] args) {
 
-	static double getRandom(){
-		return Math.floor(Math.random() * 10) % 3;
-	}
+		System.out.println(" Welcome To Employee Wage Computation Program ");
 
-	static int getEmployeeHours(int empPresent){
+		int empHour=0;
+		final int empRatePerHour=20;
+		int empSalary=0;
+		final int partTime=0;
+		final int fullTime=1;
+		final int workingDays=20;
+		int totalEmpSalary=0;
+		for(int day=1;day<workingDays;day++) {	
+			double empPresent = Math.floor(Math.random() * 10) % 3;
+			switch ((int)empPresent) {
 
-		int employeeHour=0;
-		switch(empPresent)
-		{
-			case partTime:
+				case partTime:
 					System.out.println("Employee is part time Present");
-					employeeHour=4;
-					break;
-			case fullTime:
+					empHour=4;
+					break; 
+				case fullTime:
 					System.out.println("Employee is full time Present");
-					employeeHour=8;
+					empHour=8;
 					break;
-			default:
+				default:
+					empHour=0;
 					System.out.println("Employee is Absent");
-		}
-		return employeeHour;
-	}
-
-	public static void main(String[] args) {
-		System.out.println("Welcome to Employee Wage Program");
-
-		double empPresent = getRandom();
-		empHour = getEmployeeHours((int)empPresent);
-
+					break;
+			}
 		empSalary=empRatePerHour*empHour;
-		System.out.println("Salary is :" + empSalary);
+		totalEmpSalary+=empSalary;
+		}
+
+		System.out.println("Salary is :" +totalEmpSalary);
 	}
 }
