@@ -14,7 +14,7 @@ public static void main(String[] args) {
 		final int workingHours=100;
 		int totalEmpHours=0;
 		int totalWorkingDays=0;
-		while(totalEmpHours<workingHours && totalWorkingDays<workingHours){
+		while(totalEmpHours<workingHours && totalWorkingDays<workingDays){
 			totalWorkingDays++;
 			double empPresent = Math.floor(Math.random() * 10) % 3;
 			switch ((int)empPresent) {
