@@ -1,19 +1,24 @@
 class EmpWageBuilder
 {
 
-	int empHour=0;
 	final int empRatePerHour=20;
-	int empSalary=0;
 	final int partTime=0;
 	final int fullTime=1;
 	final int workingDays=20;
+	int empHour=0;
+	int empSalary=0;
 	int totalEmpSalary=0;
-	final int workingHours=100;
 	int totalEmpHours=0;
-	int totalWorkingDays=0;
+	int workingHours;
+	int totalWorkingDays;
+	String companyName;
 
 
-	void ComputeWage() {
+	void ComputeWage(String name, int hours, int days) {
+		String companyName=name;
+		int workingHours=hours;
+		int workingDays=days;
+
 		while(totalEmpHours<workingHours && totalWorkingDays<workingDays){
 			totalWorkingDays++;
 			double empPresent = Math.floor(Math.random() * 10) % 3;
@@ -37,6 +42,8 @@ class EmpWageBuilder
 			empSalary=empRatePerHour*empHour;
 			totalEmpSalary+=empSalary;
 		}
+
+		System.out.println("Company name="+name);
 		System.out.println("Total hours="+totalEmpHours+"; Total Worked days="+totalWorkingDays);
 		System.out.println("Salary is :" +totalEmpSalary);
 
@@ -44,6 +51,8 @@ class EmpWageBuilder
 	public static void main(String[] args) {
 		System.out.println(" Welcome To Employee Wage Computation Program ");
 		EmpWageBuilder wage = new EmpWageBuilder();
-		wage.ComputeWage();
+		wage.ComputeWage("Reliance",150,25);
+
+		wage.ComputeWage("Tata",200,30);
 	}
 }
