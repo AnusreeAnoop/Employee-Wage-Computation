@@ -11,7 +11,11 @@ public static void main(String[] args) {
 		final int fullTime=1;
 		final int workingDays=20;
 		int totalEmpSalary=0;
-		for(int day=1;day<workingDays;day++) {	
+		final int workingHours=100;
+		int totalEmpHours=0;
+		int totalWorkingDays=0;
+		while(totalEmpHours<workingHours && totalWorkingDays<workingHours){
+			totalWorkingDays++;
 			double empPresent = Math.floor(Math.random() * 10) % 3;
 			switch ((int)empPresent) {
 
@@ -27,9 +31,11 @@ public static void main(String[] args) {
 					empHour=0;
 					System.out.println("Employee is Absent");
 					break;
+			
 			}
-		empSalary=empRatePerHour*empHour;
-		totalEmpSalary+=empSalary;
+			totalEmpHours+=empHour;
+			empSalary=empRatePerHour*empHour;
+			totalEmpSalary+=empSalary;
 		}
 
 		System.out.println("Salary is :" +totalEmpSalary);
