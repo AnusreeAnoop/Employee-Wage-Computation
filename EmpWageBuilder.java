@@ -14,10 +14,12 @@ class EmpWageBuilder
 	String companyName;
 
 
-	void ComputeWage(String name, int hours, int days) {
+	EmpWageBuilder(String name, int hours, int days) {
 		String companyName=name;
 		int workingHours=hours;
 		int workingDays=days;
+		System.out.println();
+		System.out.println("Company name="+name);
 
 		while(totalEmpHours<workingHours && totalWorkingDays<workingDays){
 			totalWorkingDays++;
@@ -25,16 +27,16 @@ class EmpWageBuilder
 			switch ((int)empPresent) {
 
 				case partTime:
-					System.out.println("Employee is part time Present");
+					System.out.println("Day:"+totalWorkingDays+"; Employee is part time Present; Employee hours:"+totalEmpHours);
 					empHour=4;
 					break; 
 				case fullTime:
-					System.out.println("Employee is full time Present");
+					System.out.println("Day:"+totalWorkingDays+"; Employee is full time Present; Employee hours:"+totalEmpHours);
 					empHour=8;
 					break;
 				default:
 					empHour=0;
-					System.out.println("Employee is Absent");
+					System.out.println("Day:"+totalWorkingDays+"; Employee is Absent");
 					break;
 			
 			}
@@ -43,16 +45,14 @@ class EmpWageBuilder
 			totalEmpSalary+=empSalary;
 		}
 
-		System.out.println("Company name="+name);
 		System.out.println("Total hours="+totalEmpHours+"; Total Worked days="+totalWorkingDays);
 		System.out.println("Salary is :" +totalEmpSalary);
 
 	}
 	public static void main(String[] args) {
 		System.out.println(" Welcome To Employee Wage Computation Program ");
-		EmpWageBuilder wage = new EmpWageBuilder();
-		wage.ComputeWage("Reliance",150,25);
+		EmpWageBuilder wage1 = new EmpWageBuilder("Reliance",150,25);
+		EmpWageBuilder wage2 = new EmpWageBuilder("Tata",200,30);
 
-		wage.ComputeWage("Tata",200,30);
 	}
 }
