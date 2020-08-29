@@ -5,7 +5,7 @@ class CompanyEmpWage {
 	public final int numberOfWorkingDays;
 	public final int maxHrPerMonth;
 	public int totalEmpWage;
-
+	ArrayList<Integer> dailyWage=new ArrayList<Integer>();
 	public CompanyEmpWage(String company, int empRatePerHr, int numberOfWorkingDays, int maxHrPerMonth) {
 		this.company = company;
 		this.empRatePerHr = empRatePerHr;
@@ -25,12 +25,16 @@ class EmpWageBuilder {
         //constant
         public static final int IS_FULL_TIME = 1;
         public static final int IS_PART_TIME = 2;
-
+		int daySalary;
 	private int numOfCompany = 0;
+	ArrayList<Integer> dailyWage=new ArrayList<Integer>();
 	private ArrayList<CompanyEmpWage> companyEmpWageArrayList;
 	public EmpWageBuilder() {
 		companyEmpWageArrayList = new ArrayList<>();
 
+	}
+	public void dailyWage(){
+		dailyWage.add(daySalary);
 	}
 	private void addCompanyEmpWage(String company, int empRatePerHr, int numberOfWorkingDays, int maxHrPerMonth) {
 		CompanyEmpWage companyEmpWage = new CompanyEmpWage(company, empRatePerHr, numberOfWorkingDays, maxHrPerMonth);
@@ -46,7 +50,7 @@ class EmpWageBuilder {
 			System.out.println(companyEmpWage);
 		}
 	}
-       private int computeEmpWage(CompanyEmpWage companyEmpWage) {
+       	private int computeEmpWage(CompanyEmpWage companyEmpWage) {
                 //variables
 
 		int empHrs = 0;
@@ -70,10 +74,12 @@ class EmpWageBuilder {
                                         empHrs = 0;
 
 			}//switch
+			int daySalary=empHrs*companyEmpWage.empRatePerHr;
+				companyEmpWage.dailyWage.add(daySalary);
 			totalEmpHrs += empHrs;
 			System.out.println("totalWorkingDays: "+totalWorkingDays+"/ daly empHrs: "+empHrs+"/ totalEmpHrs: "+totalEmpHrs);
 		}//while
-
+		System.out.println(companyEmpWage.dailyWage);
 		return totalEmpHrs * companyEmpWage.empRatePerHr;
 
 
@@ -85,11 +91,11 @@ class EmpWageBuilder {
 
         public static void main(String[] args) {
         	EmpWageBuilder empWageBuilder = new EmpWageBuilder();
-		empWageBuilder.addCompanyEmpWage("Reliance", 50, 20, 100);
-		empWageBuilder.addCompanyEmpWage("Tata", 20, 20, 100);
-		empWageBuilder.addCompanyEmpWage("accenture", 100, 20, 100);
-		empWageBuilder.addCompanyEmpWage("IBM", 100, 20, 100);
-		empWageBuilder.addCompanyEmpWage("google", 100, 20, 100);
+		empWageBuilder.addCompanyEmpWage("icici", 50, 2, 100);
+		empWageBuilder.addCompanyEmpWage("DMart", 20, 4, 100);
+		empWageBuilder.addCompanyEmpWage("accenture", 20, 6, 100);
+		empWageBuilder.addCompanyEmpWage("IBM", 100, 8, 100);
+		empWageBuilder.addCompanyEmpWage("google", 100, 10, 100);
 		empWageBuilder.computeEmpWage();
         }//main()
 }//class
