@@ -1,10 +1,4 @@
-interface InEmpWageBuilder {
-        public void addCompanyEmpWage(String company, int empRatePerHr, int numberOfWorkingDays, int maxHrPerMonth);
-        public void computeEmpWage();
-
-}//s  interface
-
-
+import java.util.ArrayList;
 class CompanyEmpWage {
 	public final String company;
 	public final int empRatePerHr;
@@ -24,35 +18,36 @@ class CompanyEmpWage {
 	}
 	public String toString() {
 			return "Total employee wage for: " +company+ " is " +totalEmpWage;
-		}
+	}
 }
 
-//implementation of interface
-
-class EmpWageBuilder implements InEmpWageBuilder {
+class EmpWageBuilder {
         //constant
         public static final int IS_FULL_TIME = 1;
         public static final int IS_PART_TIME = 2;
 
 	private int numOfCompany = 0;
-	private CompanyEmpWage[] companyEmpWageArray;
+	private ArrayList<CompanyEmpWage> companyEmpWageArrayList;
 	public EmpWageBuilder() {
-		companyEmpWageArray = new CompanyEmpWage[5];
-	}
-	public void addCompanyEmpWage(String company, int empRatePerHr, int numberOfWorkingDays, int maxHrPerMonth) {
-		companyEmpWageArray[numOfCompany] = new CompanyEmpWage(company, empRatePerHr, numberOfWorkingDays, maxHrPerMonth);
-
-		numOfCompany++;
+		companyEmpWageArrayList = new ArrayList<>();
 
 	}
-	public void computeEmpWage() {
-		for (int i=0; i<numOfCompany; i++) {
-			companyEmpWageArray[i].setTotalEmpWage(this.computeEmpWage(companyEmpWageArray[i]));
-			System.out.println(companyEmpWageArray[i]);
+	private void addCompanyEmpWage(String company, int empRatePerHr, int numberOfWorkingDays, int maxHrPerMonth) {
+		CompanyEmpWage companyEmpWage = new CompanyEmpWage(company, empRatePerHr, numberOfWorkingDays, maxHrPerMonth);
+		companyEmpWageArrayList.add(companyEmpWage);
+		//numOfCompany++;
+
+
+	}
+	private void computeEmpWage() {
+		for (int i=0; i<companyEmpWageArrayList.size(); i++) {
+			CompanyEmpWage companyEmpWage = companyEmpWageArrayList.get(i);
+			companyEmpWage.setTotalEmpWage(this.computeEmpWage(companyEmpWage));
+			System.out.println(companyEmpWage);
 		}
 	}
-        private int computeEmpWage(CompanyEmpWage companyEmpWage) {
-        //variables
+       private int computeEmpWage(CompanyEmpWage companyEmpWage) {
+                //variables
 
 		int empHrs = 0;
 		int totalEmpHrs = 0;
@@ -66,8 +61,8 @@ class EmpWageBuilder implements InEmpWageBuilder {
 			double empCheck = Math.floor(Math.random() * 10) % 3;
 			switch ((int)empCheck) {
                         	case IS_FULL_TIME :
-                                	empHrs = 8;
-                                	break;
+                                        empHrs = 8;
+                                        break;
                                 case IS_PART_TIME :
                                         empHrs = 4;
                                         break;
@@ -76,7 +71,7 @@ class EmpWageBuilder implements InEmpWageBuilder {
 
 			}//switch
 			totalEmpHrs += empHrs;
-			System.out.println(totalWorkingDays+" "+totalEmpHrs);
+			System.out.println("totalWorkingDays: "+totalWorkingDays+"/ daly empHrs: "+empHrs+"/ totalEmpHrs: "+totalEmpHrs);
 		}//while
 
 		return totalEmpHrs * companyEmpWage.empRatePerHr;
@@ -90,10 +85,11 @@ class EmpWageBuilder implements InEmpWageBuilder {
 
         public static void main(String[] args) {
         	EmpWageBuilder empWageBuilder = new EmpWageBuilder();
-		empWageBuilder.addCompanyEmpWage("icici", 50, 20, 100);
-		empWageBuilder.addCompanyEmpWage("DMart", 20, 20, 100);
+		empWageBuilder.addCompanyEmpWage("Reliance", 50, 20, 100);
+		empWageBuilder.addCompanyEmpWage("Tata", 20, 20, 100);
 		empWageBuilder.addCompanyEmpWage("accenture", 100, 20, 100);
+		empWageBuilder.addCompanyEmpWage("IBM", 100, 20, 100);
+		empWageBuilder.addCompanyEmpWage("google", 100, 20, 100);
 		empWageBuilder.computeEmpWage();
         }//main()
 }//class
-
